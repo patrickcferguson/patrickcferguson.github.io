@@ -43,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8201d6e116a3b517612caad013a7b2b1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-fef14f5482ceb66ca2631c2d35d797e2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -225,6 +225,9 @@ Patrick Ferguson
 <div class="paper-status">
 <p>Job market paper</p>
 </div>
+<div class="paper-download">
+<p><a class="paper-pdf-link" href="Patrick_Ferguson_JMP.pdf" target="_blank" rel="noopener" aria-label="Read Paying to Sharpen Identification (PDF)">pdf</a></p>
+</div>
 <details class="paper-summary">
 <summary><span>Abstract</span></summary>
 <p>Observations that are rounded, mismeasured, missing, or otherwise coarsened can often be probed through follow-up questions, remeasurement, or linkage across data sources. This paper develops a framework for selecting which observations to probe under a budget constraint. The value of probing is measured by the reduction in identified-set diameter, and the cost of probing is obtained by integrating observation-level costs. For scalar expectations, and for univariate distributions under Wasserstein-1 distance, identified-set diameter decomposes into additive observation-level contributions. This decomposition yields a simple optimal rule for data probing: probe observations in decreasing order of expected diameter reduction per unit cost, until the budget is exhausted. In a counterfactual survey-design application based on Manski and Straub’s (2000) analysis of worker expectations, targeting follow-up questions to the coarsest 25% of initially ambiguous responses captures 70% of the identified-set diameter reduction attainable by questioning all respondents.</p>
@@ -333,6 +336,49 @@ function applyMobileLayout(config, doc = document) {
   context.update();
 }
 document.addEventListener("DOMContentLoaded", () => applyMobileLayout({"layout":"wrap-right"}));
+</script>
+<!-- Keep text selectable, but do not start selection from empty space. -->
+<script>
+document.addEventListener("mousedown", (event) => {
+  if (event.button !== 0 || !(event.target instanceof Element)) return;
+  if (event.target.closest("a, button, summary, input, textarea, select, label, [contenteditable], iframe")) return;
+
+  let node, offset;
+  if (document.caretPositionFromPoint) {
+    const caret = document.caretPositionFromPoint(event.clientX, event.clientY);
+    if (caret) { node = caret.offsetNode; offset = caret.offset; }
+  } else if (document.caretRangeFromPoint) {
+    const caret = document.caretRangeFromPoint(event.clientX, event.clientY);
+    if (caret) { node = caret.startContainer; offset = caret.startOffset; }
+  }
+
+  let onText = false;
+  if (node && node.nodeType === Node.TEXT_NODE) {
+    const style = getComputedStyle(node.parentElement);
+    if (style.visibility === "visible" && style.display !== "none") {
+      for (const index of [offset - 1, offset]) {
+        if (index < 0 || index >= node.length) continue;
+        const range = document.createRange();
+        range.setStart(node, index);
+        range.setEnd(node, index + 1);
+        for (const rect of range.getClientRects()) {
+          if (rect.width > 0 && rect.height > 0 &&
+              event.clientX >= rect.left && event.clientX <= rect.right &&
+              event.clientY >= rect.top && event.clientY <= rect.bottom) {
+            onText = true;
+            break;
+          }
+        }
+        if (onText) break;
+      }
+    }
+  }
+
+  if (!onText) {
+    event.preventDefault();
+    window.getSelection()?.removeAllRanges();
+  }
+}, true);
 </script>
 
 
