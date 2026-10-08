@@ -1,1 +1,1 @@
-Sitemap: https://caledonian-american.netlify.app/sitemap.xml
+Sitemap: https://patrickcferguson.github.io/sitemap.xml
